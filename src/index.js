@@ -3,8 +3,12 @@ import fastify from "fastify";
 const app = fastify();
 const port = 3000;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+app.get("/hello", (req, res) => {
+  let { name } = req.query;
+  if (!name || name.trim().length === 0) {
+    name = "World";
+  }
+  res.send(`Hello, ${name}!`);
 });
 
 app.listen({ port }, () => {
